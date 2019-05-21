@@ -1,0 +1,335 @@
+{% extends "layout.html" %}
+{% block title %}Predict!{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+
+<div class="col-sm-8">
+    <h1>Tell me about your space!</h1>
+
+    <p>...and I will tell you how likely it will receive a <i>5-star</i> rating on Airbnb</i>
+
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <div class="col-xs-3">
+                        <label for="neighborhood">
+                            <h4><span class=" label label-primary">Where in Seattle?</span></h4>
+                        </label>
+                    </div>
+                    <div class="col-xs-2">
+                        <select id="neighborhood" class="form-control input-lg" autocomplete="off">
+                            <option value='Downtown'>Downtown</option>
+                            <option value='Capitol Hill'>Capitol Hill</option>
+                            <option value='Central Area'>Central District</option>
+                            <option value='Queen Anne'>Queen Anne</option>
+                            <option value='West Seattle'>West Seattle</option>
+                            <option value='Ballard'>Ballard</option>
+                            <option value='Rainier Valley'>Rainier Valley</option>
+                            <option value='Beacon Hill'>Beacon Hill</option>
+                            <option value='Cascade'>Cascade</option>
+                            <option value='Delridge'>Delridge</option>
+                            <option value='University District'>U District</option>
+                            <option value='Northgate'>Northgate</option>
+                            <option value='Magnolia'>Magnolia</option>
+                            <option value='Lake City'>Lake City</option>
+                            <option value='Seward Park'>Seward Park</option>
+                            <option value='Interbay'>Interbay</option>
+                            <option value='Other neighborhoods'>Others</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-xs-3">
+                        <label for="room_type">
+                            <h4><span class=" label label-primary">Type of Room?</span></h4>
+                        </label>
+                    </div>
+                    <div class="col-xs-2">
+                        <select id="room_type" class="form-control input-lg" autocomplete="off">
+                            <option value='Entire home/apt'>Entire Home or Apartment</option>
+                            <option value='Private room'>Private Room</option>
+                            <option value='Shared room'>Shared Room</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-xs-3">
+                        <label for="class_type">
+                            <h4><span class=" label label-primary">Is it Instantly Bookable?</span></h4>
+                        </label>
+                        <select id="instant_bookable" class="form-control input-lg" autocomplete="off">
+                            <option value='t'>Yes</option>
+                            <option value='f'>No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <div class="col-xs-3">
+                        <label for="class_type">
+                            <h4><span class=" label label-primary">Bedrooms</span></h4>
+                        </label>
+                        <select id="bedrooms" class="form-control form-control-sm">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-xs-3">
+                        <label for="class_type">
+                            <h4><span class=" label label-primary">Bathrooms</span></h4>
+                        </label>
+                    </div>
+                    <select id="bathrooms" class="form-control form-control-sm">
+                        <option>0</option>
+                        <option>0.5</option>
+                        <option>1</option>
+                        <option>1.5</option>
+                        <option>2</option>
+                        <option>2.5</option>
+                        <option>3</option>
+                        <option>3.5</option>
+                        <option>4</option>
+                        <option>4.5</option>
+                        <option>5</option>
+                        <option>5.5</option>
+                        <option>6</option>
+                        <option>6.5</option>
+                        <option>7</option>
+                        <option>7.5</option>
+                        <option>8</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <div class="col-xs-3">
+                        <label for="class_type">
+                            <h4><span class=" label label-primary">Beds</span></h4>
+                        </label>
+                        <select id="beds" class="form-control form-control-sm">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <div class="col-xs-3">
+                        <label for="class_type">
+                            <h4><span class=" label label-primary">Price Per Night</span></h4>
+                        </label>
+                        <input type="range" id="price" value="0" min="0" max="1000" step="5" />
+                        <div>
+                            Price: $<span id='read_price'>0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-xs-3">
+                        <label for="class_type">
+                            <h4><span class=" label label-primary">Security Deposit</span></h4>
+                        </label>
+                    </div>
+                    <input type="range" id="security" value="0" min="0" max="5000" step="50" />
+                    <div>
+                        Security Deposit: $<span id='read_deposit'>0</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-xs-3">
+                        <label for="class_type">
+                            <h4><span class=" label label-primary">Cleaning Fee</span></h4>
+                        </label>
+                    </div>
+                    <input type="range" id="cleaning" value="0" min="0" max="500" step="5" />
+                    <div>
+                        Cleaning Fee: $<span id='read_cleaning'>0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <div class="col-xs-3">
+                        <label for="class_type">
+                            <h4><span class=" label label-primary">Minimum # of Nights?</span></h4>
+                        </label>
+                        <input type="range" id="minimum_nights" value="1" min="1" max="7" step="1" />
+                        <div>
+                            Nights: <span id='read_min_nights'>1</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-xs-3">
+                        <label for="class_type">
+                            <h4><span class=" label label-primary">Available days in the next 30?</span>
+                            </h4>
+                        </label>
+                    </div>
+                    <input type="range" id="availability_30" value="0" min="0" max="30" step="1" />
+                    <div>
+                        Days: <span id='read_30'>0</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="col-xs-3">
+                        <label for="class_type">
+                            <h4><span class=" label label-primary">Available days in the next 90?</span>
+                            </h4>
+                        </label>
+                    </div>
+                    <input type="range" id="availability_90" value="0" min="0" max="90" step="1" />
+                    <div>
+                        Days: <span id='read_90'>0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-3">
+                    <div class="col-xs-3">
+                        <label for="class_type">
+                            <h4><span class=" label label-primary">Extra Person Charge</span></h4>
+                        </label>
+                    </div>
+                    <input type="range" id="extra_people" value="0" min="0" max="300" step="1" />
+                    <div>
+                        Extra Charge: $<span id='read_extra_people'>0</span>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="col-xs-3">
+                        <label for="class_type">
+                            <h4><span class=" label label-primary">Select All Amenities:</span>
+                            </h4>
+                        </label>
+                    </div>
+                    <div class="controls span2 amenity">
+                        {% for entry in amenities %}
+                        <label class="checkbox">
+                            <input type="checkbox" value="0" id={{entry.id}}>{{entry.label}}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button id="submit" class="btn btn-primary">Click for Ratings!</button>
+        </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $('#submit').click(() => { send_data(); });
+    $('#price').change(() => {
+        $('#read_price').html($('#price').val());
+    });
+    $('#security').change(() => {
+        $('#read_deposit').html($('#security').val());
+    });
+    $('#cleaning').change(() => {
+        $('#read_cleaning').html($('#cleaning').val());
+    });
+    $('#availability_30').change(() => {
+        $('#read_30').html($('#availability_30').val());
+    });
+    $('#availability_90').change(() => {
+        $('#read_90').html($('#availability_90').val());
+    });
+    $('#minimum_nights').change(() => {
+        $('#read_min_nights').html($('#minimum_nights').val());
+    });
+    $('#extra_people').change(() => {
+        $('#read_extra_people').html($('#extra_people').val());
+    });
+    $(":checkbox").change(function () {
+        $(this).val($(this).is(":checked") ? 1 : 0);
+    });
+    let amenities = {{ amenities | safe }};
+
+    function send_data() {
+        let features = {
+            'host_verifications': 1,
+            'neighbourhood_group_cleansed': $('#neighborhood').val(),
+            'room_type': $('#room_type').val(),
+            'bathrooms': parseInt($('#bathrooms').val()),
+            'bedrooms': parseInt($('#bedrooms').val()),
+            'beds': parseInt($('#beds').val()),
+            'price': parseInt($('#price').val()),
+            'security_deposit': parseInt($('#security').val()),
+            'cleaning_fee': parseInt($('#cleaning').val()),
+            'extra_people': parseInt($('#extra_people').val()),
+            'minimum_nights': parseInt($('#minimum_nights').val()),
+            'calendar_updated': 150,
+            'availability_30': parseInt($('#availability_30').val()),
+            'availability_90': parseInt($('#availability_90').val()),
+            'instant_bookable': $('#instant_bookable').val(),
+            'bikescore': 47,
+            'walkscore': 55,
+            'price_bed': $('#price').val() * 1 * $('#bedrooms').val() * 1,
+            'calendar_availability': 0 * 1 * parseInt($('#availability_90').val()) * 1
+        }
+
+        amenities.forEach(amenity => {
+            features[amenity.label] = parseInt($(`#${amenity.id}`).val(), 10)
+        })
+
+        console.log(features);
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: "/predict",  // Replace with URL of POST handler
+            dataType: "json",
+            async: true,
+            data: JSON.stringify(features),
+            success: (result) => {
+                $('#soft_predict').html(Math.floor(parseFloat(result['result']) * 1000) / 10);
+                $('#add').html(result['add']);
+                $('#improvement').html(Math.floor(parseFloat(result['improvement']) * 1000) / 10);
+                $('#the_result_div').show();
+            },
+            error: (result) => {
+                alert('I dunno what you did');
+            }
+        })
+    }
+</script>
+
+{% endblock %}

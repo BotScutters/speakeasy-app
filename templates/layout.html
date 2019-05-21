@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140522795-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-140522795-1');
+    </script>
+    <title>{% block title %}{% endblock %} - AI Bartender</title>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Thumbnail Image-->
+    <meta property="og:image" content="https://s3-us-west-2.amazonaws.com/datatostories/flask-app-screenshot.png" />
+    {% endblock %}
+</head>
+
+<body>
+    <div class="bg">
+        <div class="card card-body">
+        
+
+            <div class="jumbotron jumbotron-fluid text-center" style="margin-bottom:0">
+                {% block header %}
+                <h1>SpeakEasy</h1>
+                <p>the AI Bartender</p>
+                {% endblock %}
+            </div>
+
+            <div class="container-fluid" style="margin-top:30px">
+                
+                    {% block content%}{% endblock %}
+                </div>
+            </div>
+
+            <div class="footer jumbotron jumbotron-fluid text-center" style="margin-bottom:0">
+                {% block footer %}
+                        This app was created by Scott Butters. 
+                        <br>
+                        <a href="https://github.com/botscutters" class="badge badge-light">GitHub</a> 
+                        <a href="https://linkedin.com/in/scott-butters" class="badge badge-light">LinkedIn</a>
+                        <a href="http://scottbutters.com" class="badge badge-light">Bits 'n' Bots</a>
+                {% endblock %}
+            </div>
+
+        </div>
+    </div>
+</body>
+{% block scripts %}{% endblock %}
+
+</html>

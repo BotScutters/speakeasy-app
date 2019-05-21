@@ -1,0 +1,48 @@
+@import url("bootstrap.min.css");
+
+.jumbotron{
+    color: #FFFFFF;
+    padding: 0rem 2rem !important;
+    background-color:black !important;
+}
+
+.amenity{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.btn, .btn-primary {
+    background-color: black !important;
+    border-color: #FFFFFF !important;
+}
+
+.card {
+    background-color:rgba(128, 128, 128, 0.473) !important;
+    border:0px !important;
+
+}
+.card-body {
+    padding: 0rem !important;
+  }
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0.5rem;
+}
+body, html {
+    height: 100%;
+  }
+  
+  .bg { 
+    /* The image used */
+    background-image: url("img/bar2.jpg");
+  
+    /* Full height */
+    height: 100%; 
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -1,0 +1,32 @@
+@import url("bootstrap.min.css");
+
+.jumbotron{
+    color: #FFFFFF;
+    background-color:grey !important;
+}
+
+.amenity{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.btn, .btn-primary {
+    background-color: grey !important;
+    border-color: #FFFFFF !important;
+}
+
+body, html {
+    height: 100%;
+  }
+  
+  .bg { 
+    /* The image used */
+    background-image: url("img/bar2.jpg");
+  
+    /* Full height */
+    height: 100%; 
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
