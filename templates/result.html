@@ -1,34 +1,28 @@
-% extends "layout.html" %}
+{% extends "layout.html" %}
 {% block title %}Result{% endblock %}
 {% block head %}
 {{ super() }}
 {% endblock %}
 {% block content %}
-<div class="col-sm-8">
-    <h1>Your Prediction: </h1>
-    <div class="row" style="display: none" id='the_result_div'>
+<div class="card">
+    <h1>I'll make you a: </h1>
+    <div class="row" style="display: none" id="the_result_div">
         <div>
             <label for="prediction">
-                <h4><span class="label label-primary">Prediction:</span></h4>
+                <h4><span id="name">%</span></h4>
             </label>
         </div>
         <br>
         <div>
-            Your probability of getting a 5-star ratings is
-            <b><span id="soft_predict"></span>%</b>.
+            The recipe for that is
+            <b><span id="recipe_html"></span>%</b>.
         </div>
         <div>
-            <label for="suggestions">
-                <h4><span class="label label-primary">Recommendation:</span>
-                </h4>
-            </label>
-        </div>
-        <div>
-            Add this amenity: <b><span id="add"></span></b>
-            <br>This will boost your probability to: <b><span id="improvement"></span>%</b>
+            <a href="url">
+            <img src="img" class="rounded float-right" alt="...">
         </div>
     </div>
-    <h4><a href="/rate" class="btn btn-primary" role="button">Try Another</a>
+    <h4><a href="/" class="btn btn-primary" role="button">I'll have another</a>
     </h4>
 </div>
 {% endblock %}

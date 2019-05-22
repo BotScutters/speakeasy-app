@@ -26,31 +26,29 @@
 <body>
     <div class="bg">
         <div class="card card-body">
-        
-
             <div class="jumbotron jumbotron-fluid text-center" style="margin-bottom:0">
                 {% block header %}
-                <h1>SpeakEasy</h1>
-                <p>the AI Bartender</p>
+                    <h1>SpeakEasy</h1>
+                    <p>the AI Bartender</p>
                 {% endblock %}
             </div>
 
             <div class="container-fluid" style="margin-top:30px">
                 
                     {% block content%}{% endblock %}
-                </div>
+
             </div>
 
-            <div class="footer jumbotron jumbotron-fluid text-center" style="margin-bottom:0">
-                {% block footer %}
-                        This app was created by Scott Butters. 
-                        <br>
-                        <a href="https://github.com/botscutters" class="badge badge-light">GitHub</a> 
-                        <a href="https://linkedin.com/in/scott-butters" class="badge badge-light">LinkedIn</a>
-                        <a href="http://scottbutters.com" class="badge badge-light">Bits 'n' Bots</a>
-                {% endblock %}
-            </div>
+        </div>
 
+        <div class="footer jumbotron jumbotron-fluid text-center" style="margin-bottom:0">
+            {% block footer %}
+                    This app was created by Scott Butters. 
+                    <br>
+                    <a href="https://github.com/botscutters" class="badge badge-light">GitHub</a> 
+                    <a href="https://linkedin.com/in/scott-butters" class="badge badge-light">LinkedIn</a>
+                    <a href="http://scottbutters.com" class="badge badge-light">Bits 'n' Bots</a>
+            {% endblock %}
         </div>
     </div>
 </body>

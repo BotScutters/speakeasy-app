@@ -3,12 +3,55 @@
 {% block head %}
 {{ super() }}
 {% endblock %}
+
 {% block content %}
 <div class="card">
     <h1>What'll you have?</h1>
-
+    <form>
+        <div class="form-group">
+            <label for="drinkRequest">
+                SpeakEasy is built on a powerful natural language processing engine and has a comprehensive knowledge of
+                the ingredients and flavor profiles of thousands of cocktails. Enter a drink request below, and be as detailed as you want! 
+            </label>
+            <textarea class="form-control" type="text" id="drinkRequest" rows="3"></textarea>
+        </div>
+    </form>
     <h4>
-        <a href="/rate" class="btn btn-primary" role="button">Let's Go!</a>
+        <a href="/result" id="submit" class="btn btn-primary" role="button">Mix it up!</a>
     </h4>
 </div>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $('#submit').click(() => { send_data(); });
+    function send_data() {
+        let req = {
+            'request': $('#drinkRequest').val()
+            }
+
+        console.log(req)
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: "/predict",  // Replace with URL of POST handler
+            dataType: "json",
+            async: true,
+            data: JSON.stringify(req),
+            success: (result) => {
+                $('#img').html(result['img']);
+                $('#url').html(result['url']);
+                $('#recipe').html(result['recipe_html']);
+                $('#name').html(result['name']);
+                $('#the_result_div').show();
+            },
+            error: (result) => {
+                alert('I dunno what you did');
+            }
+        })
+    }
+</script>
+
 {% endblock %}
