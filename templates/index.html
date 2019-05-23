@@ -239,7 +239,8 @@
                     <div class="controls span2 amenity">
                         {% for entry in amenities %}
                         <label class="checkbox">
-                            <input type="checkbox" value="0" id={{entry.id}}>{{entry.label}}
+                            <input type="checkbox" value="0" id={{entry.id}}>
+                            {{entry.label}}
                         </label>
                         {% endfor %}
                     </div>
