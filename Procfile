@@ -1,1 +1,1 @@
-web: gunicorn airbnb_ratings_app:app
+web: gunicorn speakeasy_app:app
