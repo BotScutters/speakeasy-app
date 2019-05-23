@@ -42,20 +42,22 @@
                 <div>
                     <h3>Description:</h3>
                     <p><span id="description"></span></p>
+                    <p>Recipe courtesy of <a id='url' href={{ url }}>Difford's Guide</a>.</p>
                 </div>
             </div>
+
             <div class="col-sm-4">
                 <div>
-                    <a id='url' href={{ url }}>
                     <img id='img' class="card-img-top" src={{ img }}>
                     </a>
+                </div>
+                <div>
+                    <br><h4><a href="/" class="btn btn-primary" role="button">Make me another!</a></h4>
                 </div>
             </div>
         </div>
     </div>
-    <br>
-    <h4><a href="/" class="btn btn-primary" role="button">Make me another!</a>
-    </h4>
+    
 </div>
     
 {% endblock %}
@@ -93,7 +95,7 @@
                 $('#request_div').hide();
             },
             error: (result) => {
-                alert('I dunno what you did');
+                alert('Sorry, I missed that. Say again?');
             }
         })
 
