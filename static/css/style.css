@@ -17,7 +17,7 @@
 }
 
 .card {
-    background-color:rgba(128, 128, 128, 0.473) !important;
+    background-color:rgba(80, 80, 80, 0.473) !important;
     border:0px !important;
 
 }
@@ -31,8 +31,14 @@
     width: 100%;
     padding: 0.5rem;
 }
+
+/* .dataframe {
+    background-color: rgba(255, 255, 255, 0.692);
+} */
+
 body, html {
     height: 100%;
+    color: #FFFFFF;
   }
   
   .bg { 

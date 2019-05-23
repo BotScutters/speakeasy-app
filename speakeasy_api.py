@@ -1,11 +1,11 @@
 import json
-import os
-import pickle
 import re
+import urllib.request
 
 from PIL import Image
 import requests
 from io import BytesIO
+
 import numpy as np
 import pandas as pd
 
@@ -15,24 +15,21 @@ from sklearn.decomposition import TruncatedSVD
 import nltk
 
 
-def load_from(filepath):
-    """
-    Unpickles item and returns item from path
-    Input: filepath to pickled object
-    Output: unpickled object
-    """
-    with open(filepath, 'rb') as f:
-        item = pickle.load(f)
-    return item
+# def load_from(filepath):
+#     """
+#     Unpickles item and returns item from path
+#     Input: filepath to pickled object
+#     Output: unpickled object
+#     """
+#     with open(filepath, 'rb') as f:
+#         item = pickle.load(f)
+#     return item
     
 
-def predict(req=''):
+def predict(model, req=''):
     print('I predict?')
-    vectorizer = load_from('model/vectorizer.pkl')
-    svd = load_from('model/svd.pkl')
-    X_topics = load_from('model/X_topics.pkl')
-    drink_list = load_from('model/drink_list.pkl')
-    
+    (vectorizer, svd, X_topics, drink_list) = model
+
     if not req:
         test_str = 'A smoky mezcal based Manhattan variation with a bitter amaro'
 
@@ -51,20 +48,43 @@ def predict(req=''):
         name='Cosine Similarity'
     ).sort_values(ascending=False)
     drink_prediction = cos_sims_sorted.index[0]
+    drink = drink_list[drink_prediction]
+    # result = drink_list[drink_prediction]
+    # result.update({'name': drink_prediction})
+    # result.update({'recipe_html': result['recipe'].to_html()})
 
-    result = drink_list[drink_prediction]
-    result.update({'name': drink_prediction})
-    
-    print("I'll make you a")
-    print(drink_prediction)
-    print('\nThe recipe for that is:')
-    print(result['recipe'])
-    print('\nThis cocktail came from:')
-    print(result["url"])
-    
-    print(result['img'])
-    result.update({'recipe_html': result['recipe'].to_html()})
-    print('I did it!')
+    image_url = drink['img']
+    local_filename = 'image.jpg'
+    local_filename, headers = urllib.request.urlretrieve(image_url)
+
+    # img = Image.open(BytesIO(requests.get(img_url).content))
+
+    print(local_filename)
+    result = {
+        'name': drink_prediction,
+        'img': image_url,
+        'url': drink['url'],
+        'recipe': drink['recipe'].to_html()
+    }
+
+    response = requests.get(image_url)
+    im = Image.open(BytesIO(response.content))
+    im = im.convert('RGBA')
+    data = np.array(im)
+    # just use the rgb values for comparison
+    rgb = data[:,:,:3]
+    color = [246, 213, 139]   # Original value
+    black = [0,0,0, 255]
+    white = [255,255,255,255]
+    mask = np.all(rgb == color, axis = -1)
+    # change all pixels that match color to white
+    data[mask] = white
+
+    # change all pixels that don't match color to black
+    ##data[np.logical_not(mask)] = black
+    new_im = Image.fromarray(data)
+    new_im.save('static/new_file.tif')
+
     return result
 
 

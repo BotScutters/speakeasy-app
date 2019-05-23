@@ -5,21 +5,50 @@
 {% endblock %}
 
 {% block content %}
-<div class="card">
+
+<div class="card" id='request_div'>
     <h1>What'll you have?</h1>
+    <p> 
     <form>
         <div class="form-group">
             <label for="drinkRequest">
-                SpeakEasy is built on a powerful natural language processing engine and has a comprehensive knowledge of
-                the ingredients and flavor profiles of thousands of cocktails. Enter a drink request below, and be as detailed as you want! 
+                SpeakEasy is built on a powerful natural language processing engine and has a comprehensive knowledge of the
+                ingredients and flavor profiles of thousands of cocktails. Enter a drink request below, and be as detailed as you want! 
             </label>
-            <textarea class="form-control" type="text" id="drinkRequest" rows="3"></textarea>
+            <textarea class="form-control" type="text" id="drinkRequest" rows="1"></textarea>
         </div>
     </form>
     <h4>
-        <a href="/result" id="submit" class="btn btn-primary" role="button">Mix it up!</a>
+        <button id="submit" class="btn btn-primary" role="button">Mix it up!</button>
     </h4>
 </div>
+
+<div class="card" style="display: none" id="the_result_div">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div>
+                    <label for="prediction">
+                        <h2>I'll make you a <span id="name">%</span></h2>
+                    </label>
+                </div>
+                <div>
+                    <b><span id="recipe"></span></b>
+                </div>
+            </div>
+            <div class="col">
+                <div>
+                    <img id='img' src={{ img }} class="rounded float-right" alt="..." height='300'>
+                    <img src="{{url_for('static', filename='new_file.tif')}}" class='rounded float-right' alt='mod' height='300'>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h4><a href="/" class="btn btn-primary" role="button">I'll have another</a>
+    </h4>
+</div>
+    
 {% endblock %}
 
 {% block scripts %}
@@ -31,6 +60,7 @@
             'request': $('#drinkRequest').val()
             }
 
+        console.log('Your request:')
         console.log(req)
 
         $.ajax({
@@ -41,16 +71,21 @@
             async: true,
             data: JSON.stringify(req),
             success: (result) => {
-                $('#img').html(result['img']);
+                console.log('In success');
+                console.log(result['img'])
+                console.log(result['recipe_html'])
+                $('#img').attr('src', result['img']);
                 $('#url').html(result['url']);
-                $('#recipe').html(result['recipe_html']);
+                $('#recipe').html(result['recipe']);
                 $('#name').html(result['name']);
                 $('#the_result_div').show();
+                $('#request_div').hide();
             },
             error: (result) => {
                 alert('I dunno what you did');
             }
         })
+
     }
 </script>
 
