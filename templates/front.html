@@ -29,7 +29,8 @@
             <div class="col">
                 <div>
                     <label for="prediction">
-                        <h2>I'll make you a <span id="name">%</span></h2>
+                        <h3>You asked for: <span id="drink_request"></span></h3>
+                        <h3>I'll make you a <span id="name"></span></h3>
                     </label>
                 </div>
                 <div>
@@ -38,8 +39,9 @@
             </div>
             <div class="col">
                 <div>
-                    <img id='img' src={{ img }} class="rounded float-right" alt="..." height='300'>
-                    <img src="{{url_for('static', filename='new_file.tif')}}" class='rounded float-right' alt='mod' height='300'>
+                    <a id='url' href={{ url }}>
+                    <img id='img' src={{ img }} class="card-img-top" alt="..." height='300'>
+                    </a>
                 </div>
             </div>
         </div>
@@ -75,9 +77,10 @@
                 console.log(result['img'])
                 console.log(result['recipe_html'])
                 $('#img').attr('src', result['img']);
-                $('#url').html(result['url']);
+                $('#url').attr('href', result['url']);
                 $('#recipe').html(result['recipe']);
                 $('#name').html(result['name']);
+                $('#drink_request').text(result['drink_request'])
                 $('#the_result_div').show();
                 $('#request_div').hide();
             },

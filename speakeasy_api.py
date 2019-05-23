@@ -31,7 +31,7 @@ def predict(model, req=''):
     (vectorizer, svd, X_topics, drink_list) = model
 
     if not req:
-        test_str = 'A smoky mezcal based Manhattan variation with a bitter amaro'
+        req = 'A smoky mezcal based Manhattan variation with a bitter amaro'
 
     patterns = ['<.*>', '\n', '\r', '\xa0', '   ', '  ']
     for pattern in patterns:
@@ -61,6 +61,7 @@ def predict(model, req=''):
 
     print(local_filename)
     result = {
+        'drink_request': req,
         'name': drink_prediction,
         'img': image_url,
         'url': drink['url'],
