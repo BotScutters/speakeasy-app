@@ -46,5 +46,6 @@ def front():
 def result():
     return render_template("result.html")
 
-
-app.run(debug=True)
+if __name__ == "main":
+    app.run(debug=False)
+# app.run(debug=True)
