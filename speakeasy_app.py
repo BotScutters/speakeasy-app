@@ -22,11 +22,15 @@ X_topics = load_from('model/X_topics.pkl')
 drink_list = load_from('model/drink_list.pkl')
 model = vectorizer, svd, X_topics, drink_list
 
+# drink = drink_list["'75' Cocktail (Vermeire's 1922 recipe)"]
+# print(drink)
+
 @app.route("/predict", methods=['POST'])
 def make_prediction():
     if not request.json:
         abort(400)
     data = request.json
+    print('wuddup')
     result = predict(model, req=data['request'])
     print('Made prediction')
     return jsonify(result)

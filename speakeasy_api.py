@@ -2,9 +2,9 @@ import json
 import re
 import urllib.request
 
-from PIL import Image
-import requests
-from io import BytesIO
+# from PIL import Image
+# import requests
+# from io import BytesIO
 
 import numpy as np
 import pandas as pd
@@ -49,42 +49,45 @@ def predict(model, req=''):
     ).sort_values(ascending=False)
     drink_prediction = cos_sims_sorted.index[0]
     drink = drink_list[drink_prediction]
+    print(drink)
     # result = drink_list[drink_prediction]
     # result.update({'name': drink_prediction})
     # result.update({'recipe_html': result['recipe'].to_html()})
 
     image_url = drink['img']
-    local_filename = 'image.jpg'
-    local_filename, headers = urllib.request.urlretrieve(image_url)
+    # local_filename = 'image.jpg'
+    # local_filename, headers = urllib.request.urlretrieve(image_url)
 
     # img = Image.open(BytesIO(requests.get(img_url).content))
 
-    print(local_filename)
+    # print(local_filename)
     result = {
         'drink_request': req,
         'name': drink_prediction,
         'img': image_url,
         'url': drink['url'],
-        'recipe': drink['recipe'].to_html()
+        'recipe': drink['recipe_html'],
+        'description': drink['description']
     }
 
-    response = requests.get(image_url)
-    im = Image.open(BytesIO(response.content))
-    im = im.convert('RGBA')
-    data = np.array(im)
-    # just use the rgb values for comparison
-    rgb = data[:,:,:3]
-    color = [246, 213, 139]   # Original value
-    black = [0,0,0, 255]
-    white = [255,255,255,255]
-    mask = np.all(rgb == color, axis = -1)
-    # change all pixels that match color to white
-    data[mask] = white
+    ## Theoretically removes white background
+    # response = requests.get(image_url)
+    # im = Image.open(BytesIO(response.content))
+    # im = im.convert('RGBA')
+    # data = np.array(im)
+    # # just use the rgb values for comparison
+    # rgb = data[:,:,:3]
+    # color = [246, 213, 139]   # Original value
+    # black = [0,0,0, 255]
+    # white = [255,255,255,255]
+    # mask = np.all(rgb == color, axis = -1)
+    # # change all pixels that match color to white
+    # data[mask] = white
 
-    # change all pixels that don't match color to black
-    ##data[np.logical_not(mask)] = black
-    new_im = Image.fromarray(data)
-    new_im.save('static/new_file.tif')
+    # # change all pixels that don't match color to black
+    # ##data[np.logical_not(mask)] = black
+    # new_im = Image.fromarray(data)
+    # new_im.save('static/new_file.tif')
 
     return result
 
