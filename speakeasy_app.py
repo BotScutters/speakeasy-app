@@ -1,4 +1,6 @@
 from flask import Flask, request, render_template, jsonify, request, abort
+import boto3
+from io import BytesIO
 import os
 import pickle
 # from flask_bootstrap import Bootstrap
@@ -15,11 +17,20 @@ def load_from(filepath):
     with open(filepath, 'rb') as f:
         item = pickle.load(f)
     return item
+
+
+def load_pkl(file):
+    s3 = boto3.resource('s3')
+    with BytesIO() as data:
+        s3.Bucket("speakeasy-binaries").download_fileobj(file, data)
+        data.seek(0)    # move back to the beginning after writing
+        pkl = pickle.load(data)
+    return pkl
     
-vectorizer = load_from('model/vectorizer.pkl')
-svd = load_from('model/svd.pkl')
-X_topics = load_from('model/X_topics.pkl')
-drink_list = load_from('model/drink_list.pkl')
+vectorizer = load_pkl('vectorizer.pkl')
+svd = load_pkl('svd.pkl')
+X_topics = load_pkl('X_topics.pkl')
+drink_list = load_pkl('drink_list.pkl')
 model = vectorizer, svd, X_topics, drink_list
 
 # drink = drink_list["'75' Cocktail (Vermeire's 1922 recipe)"]
