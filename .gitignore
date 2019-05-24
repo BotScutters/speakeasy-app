@@ -5,3 +5,5 @@ __pycache__/speakeasy_api.cpython-37.pyc
 
 __pycache__/speakeasy_api.cpython-37.pyc
 speakeasy_api.pyc
+templates/front.1.html
+requirements_test.txt
